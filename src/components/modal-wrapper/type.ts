@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type TCentering = {
+export type TWrapper = {
   title: string;
   children?: ReactNode;
 }

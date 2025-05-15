@@ -19,7 +19,7 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getUser } from '../../services/slices/userSlice/userSlice';
 import { getIngredients } from '../../services/slices/ingredientSlice/ingredientSlice';
-import { CenteringComponent } from '../centering-component/centering-component';
+import { ModalWrapper } from '../modal-wrapper/modal-wrapper';
 
 const App = () => {
   const location = useLocation();
@@ -36,21 +36,17 @@ const App = () => {
       <AppHeader />
       <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
-        <Route
-          path='/ingredients/:id'
-          element={
-            <CenteringComponent title={'Детали ингредиента'}>
+        <Route path='/ingredients/:id' element={
+            <ModalWrapper title={'Детали ингредиента'}>
               <IngredientDetails />
-            </CenteringComponent>
+            </ModalWrapper>
           }
         />
         <Route path='/feed' element={<Feed />} />
-        <Route
-          path='/feed/:number'
-          element={
-            <CenteringComponent title={`#${location.pathname.match(/\d+/)}`}>
+        <Route path='/feed/:number' element={
+            <ModalWrapper title={`#${location.pathname.match(/\d+/)}`}>
               <OrderInfo />
-            </CenteringComponent>
+            </ModalWrapper>
           }
         />
         <Route element={<ProtectedRoute onlyUnAuth />}>
@@ -62,12 +58,10 @@ const App = () => {
         <Route element={<ProtectedRoute onlyUnAuth={false} />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/orders' element={<ProfileOrders />} />
-          <Route
-            path='/profile/orders/:number'
-            element={
-              <CenteringComponent title={`#${location.pathname.match(/\d+/)}`}>
+          <Route path='/profile/orders/:number' element={
+              <ModalWrapper title={`#${location.pathname.match(/\d+/)}`}>
                 <OrderInfo />
-              </CenteringComponent>
+              </ModalWrapper>
             }
           />
         </Route>
@@ -76,12 +70,8 @@ const App = () => {
 
       {background && (
         <Routes>
-          <Route
-            path='/ingredients/:id'
-            element={
-              <Modal
-                title={'Детали ингредиента'}
-                onClose={() => {
+          <Route path='/ingredients/:id' element={
+              <Modal title={'Детали ингредиента'} onClose={() => {
                   history.back();
                 }}
               >
@@ -90,12 +80,8 @@ const App = () => {
             }
           />
 
-          <Route
-            path='/feed/:number'
-            element={
-              <Modal
-                title={`#${location.pathname.match(/\d+/)}`}
-                onClose={() => {
+          <Route path='/feed/:number' element={
+              <Modal title={`#${location.pathname.match(/\d+/)}`} onClose={() => {
                   history.back();
                 }}
               >
@@ -104,12 +90,8 @@ const App = () => {
             }
           />
           <Route element={<ProtectedRoute onlyUnAuth={false} />}>
-            <Route
-              path='/profile/orders/:number'
-              element={
-                <Modal
-                  title={`#${location.pathname.match(/\d+/)}`}
-                  onClose={() => {
+            <Route path='/profile/orders/:number' element={
+                <Modal title={`#${location.pathname.match(/\d+/)}`} onClose={() => {
                     history.back();
                   }}
                 >

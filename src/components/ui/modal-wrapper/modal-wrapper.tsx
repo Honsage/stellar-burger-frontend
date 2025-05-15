@@ -1,8 +1,8 @@
 import { FC, memo } from 'react';
-import { TCenteringComponentUI } from './type';
-import styles from './centering-component.module.css';
+import { TModalWrapper } from './type';
+import styles from './modal-wrapper.module.css';
 
-export const CenteringComponentUI: FC<TCenteringComponentUI> = memo(
+export const ModalWrapperUI: FC<TModalWrapper> = memo(
   ({ title, titleStyle, children }) => (
     <>
       <div className={styles.center}>

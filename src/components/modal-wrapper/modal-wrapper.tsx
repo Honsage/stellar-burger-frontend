@@ -1,9 +1,9 @@
 import { FC, memo, useEffect, useState } from 'react';
-import { CenteringComponentUI } from '../ui/centering-component';
-import { TCentering } from './type';
+import { ModalWrapperUI } from '../ui/modal-wrapper';
+import { TWrapper } from './type';
 import { useLocation } from 'react-router-dom';
 
-export const CenteringComponent: FC<TCentering> = memo(
+export const ModalWrapper: FC<TWrapper> = memo(
   ({ title, children }) => {
     const location = useLocation();
     const [titleStyle, setTitleStyle] = useState('text_type_main-large');
@@ -16,7 +16,7 @@ export const CenteringComponent: FC<TCentering> = memo(
 
     return (
       <>
-        <CenteringComponentUI
+        <ModalWrapperUI
           title={title}
           titleStyle={titleStyle}
           children={children}
