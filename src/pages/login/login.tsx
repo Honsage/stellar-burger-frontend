@@ -1,8 +1,12 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { LoginUI } from '@ui-pages';
-import { useDispatch, useSelector } from 'src/services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { Navigate } from 'react-router-dom';
-import { getError, getUserState, loginUser } from 'src/services/slices/userSlice/userSlice';
+import {
+  getError,
+  getUserState,
+  loginUser
+} from '../../services/slices/userSlice/userSlice';
 
 export const Login: FC = () => {
   const [email, setEmail] = useState('');
@@ -18,10 +22,12 @@ export const Login: FC = () => {
     if (!email || !password) {
       return;
     }
-    dispatch(loginUser({
-      email: email,
-      password: password
-    }));
+    dispatch(
+      loginUser({
+        email: email,
+        password: password
+      })
+    );
   };
 
   if (isAuthenticated) {

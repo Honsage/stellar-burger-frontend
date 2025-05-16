@@ -11,12 +11,14 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
   const location = useLocation().pathname;
-  let ref = (location.match(`/ingredients/`)) ? location : '/';
+  let ref = location.match(`/ingredients/`) ? location : '/';
   return (
-  <header className={styles.header}>
-    <nav className={`${styles.menu} p-4`}>
-      <div className={styles.menu_part_left}>
-        <NavLink to={ref} className={({ isActive }) =>
+    <header className={styles.header}>
+      <nav className={`${styles.menu} p-4`}>
+        <div className={styles.menu_part_left}>
+          <NavLink
+            to={ref}
+            className={({ isActive }) =>
               `text text_type_main-medium text-primary-color pt-4 pb-4 ${
                 styles.link
               } ${isActive ? styles.link_active : ''} ${isActive ? styles.link_active : ''}`
@@ -28,7 +30,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
               Конструктор
             </p>
           </NavLink>
-          <NavLink to={'/feed'} className={({ isActive }) =>
+          <NavLink
+            to={'/feed'}
+            className={({ isActive }) =>
               `text text_type_main-medium text-primary-color pt-4 pb-4 ${
                 styles.link
               } ${isActive ? styles.link_active : ''}`
@@ -40,7 +44,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
           </NavLink>
         </div>
         <div className={styles.logo}>
-          <NavLink to={'/'} className={({ isActive }) =>
+          <NavLink
+            to={'/'}
+            className={({ isActive }) =>
               `text text_type_main-medium text-primary-color pt-4 pb-4 ${
                 styles.link
               } ${isActive ? styles.link_active : ''}`
@@ -52,7 +58,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         </div>
         <div className={styles.link_position_last}>
           {userName ? (
-            <NavLink to={'/profile'} className={({ isActive }) =>
+            <NavLink
+              to={'/profile'}
+              className={({ isActive }) =>
                 `text text_type_main-medium text-primary-color pt-4 pb-4 ${
                   styles.link
                 } ${isActive ? styles.link_active : ''}`
@@ -65,7 +73,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
               </p>
             </NavLink>
           ) : (
-            <NavLink to={'/login'} className={({ isActive }) =>
+            <NavLink
+              to={'/login'}
+              className={({ isActive }) =>
                 `text text_type_main-medium text-primary-color pt-4 pb-4 ${
                   styles.link
                 } ${isActive ? styles.link_active : ''}`
@@ -78,8 +88,8 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
               </p>
             </NavLink>
           )}
-      </div>
-    </nav>
-  </header>
-);
+        </div>
+      </nav>
+    </header>
+  );
 };

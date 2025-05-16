@@ -36,14 +36,18 @@ const App = () => {
       <AppHeader />
       <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
-        <Route path='/ingredients/:id' element={
+        <Route
+          path='/ingredients/:id'
+          element={
             <ModalWrapper title={'Детали ингредиента'}>
               <IngredientDetails />
             </ModalWrapper>
           }
         />
         <Route path='/feed' element={<Feed />} />
-        <Route path='/feed/:number' element={
+        <Route
+          path='/feed/:number'
+          element={
             <ModalWrapper title={`#${location.pathname.match(/\d+/)}`}>
               <OrderInfo />
             </ModalWrapper>
@@ -58,7 +62,9 @@ const App = () => {
         <Route element={<ProtectedRoute onlyUnAuth={false} />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/orders' element={<ProfileOrders />} />
-          <Route path='/profile/orders/:number' element={
+          <Route
+            path='/profile/orders/:number'
+            element={
               <ModalWrapper title={`#${location.pathname.match(/\d+/)}`}>
                 <OrderInfo />
               </ModalWrapper>
@@ -70,8 +76,12 @@ const App = () => {
 
       {background && (
         <Routes>
-          <Route path='/ingredients/:id' element={
-              <Modal title={'Детали ингредиента'} onClose={() => {
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal
+                title={'Детали ингредиента'}
+                onClose={() => {
                   history.back();
                 }}
               >
@@ -80,8 +90,12 @@ const App = () => {
             }
           />
 
-          <Route path='/feed/:number' element={
-              <Modal title={`#${location.pathname.match(/\d+/)}`} onClose={() => {
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal
+                title={`#${location.pathname.match(/\d+/)}`}
+                onClose={() => {
                   history.back();
                 }}
               >
@@ -90,8 +104,12 @@ const App = () => {
             }
           />
           <Route element={<ProtectedRoute onlyUnAuth={false} />}>
-            <Route path='/profile/orders/:number' element={
-                <Modal title={`#${location.pathname.match(/\d+/)}`} onClose={() => {
+            <Route
+              path='/profile/orders/:number'
+              element={
+                <Modal
+                  title={`#${location.pathname.match(/\d+/)}`}
+                  onClose={() => {
                     history.back();
                   }}
                 >

@@ -7,9 +7,7 @@ type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
 };
 
-export const ProtectedRoute = ({
-  onlyUnAuth
-}: ProtectedRouteProps) => {
+export const ProtectedRoute = ({ onlyUnAuth }: ProtectedRouteProps) => {
   const location = useLocation();
 
   const data = useSelector(getUserState).userData;

@@ -1,8 +1,11 @@
 import { ProfileOrdersUI } from '@ui-pages';
 import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
-import { useSelector, useDispatch } from 'src/services/store';
-import { getOrdersAll, getUserState } from 'src/services/slices/userSlice/userSlice';
+import { useSelector, useDispatch } from '../../services/store';
+import {
+  getOrdersAll,
+  getUserState
+} from '../../services/slices/userSlice/userSlice';
 import { getFeeds } from '../../services/slices/feedSlice/feedSlice';
 import { Preloader } from '@ui';
 
@@ -17,7 +20,7 @@ export const ProfileOrders: FC = () => {
   }, []);
 
   if (isLoading) {
-    return <Preloader />
+    return <Preloader />;
   }
 
   return <ProfileOrdersUI orders={orders} />;

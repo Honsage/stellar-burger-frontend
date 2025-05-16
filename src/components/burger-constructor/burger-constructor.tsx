@@ -1,22 +1,30 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useDispatch, useSelector } from 'src/services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
-import { getConstructorState, orderBurger, setRequest, resetModal } from 'src/services/slices/constructorSlice/constructorSlice';
-import { getUserState } from 'src/services/slices/userSlice/userSlice';
+import {
+  getConstructorState,
+  orderBurger,
+  setRequest,
+  resetModal
+} from '../../services/slices/constructorSlice/constructorSlice';
+import { getUserState } from '../../services/slices/userSlice/userSlice';
 
 export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const { constructorItems, orderModalData, orderRequest } = useSelector(getConstructorState);
-  
+  const { constructorItems, orderModalData, orderRequest } =
+    useSelector(getConstructorState);
+
   const isAuth = useSelector(getUserState).isAuthenticated;
 
   let arr: string[] = [];
-  const ingredients: string[] | void = constructorItems.ingredients.map((i) => i._id);
+  const ingredients: string[] | void = constructorItems.ingredients.map(
+    (i) => i._id
+  );
   if (constructorItems.bun) {
     const bun = constructorItems.bun?._id;
     arr = [bun, ...ingredients, bun];
