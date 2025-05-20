@@ -2,6 +2,7 @@ import { FC, SyntheticEvent, useState } from 'react';
 import { LoginUI } from '@ui-pages';
 import { useDispatch, useSelector } from '../../services/store';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   getError,
   getUserState,
@@ -16,6 +17,7 @@ export const Login: FC = () => {
   const isAuthenticated = useSelector(getUserState).isAuthenticated;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ export const Login: FC = () => {
         password: password
       })
     );
+    navigate('/profile');
   };
 
   if (isAuthenticated) {
