@@ -1,5 +1,8 @@
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
+
 const BUN_ID = '643d69a5c3f7b9001cfa093c';
+const BUN_NAME = "Краторная булка N-200i";
+
 const BUN2_ID = '643d69a5c3f7b9001cfa093d';
 const MAIN_ID = '643d69a5c3f7b9001cfa0941';
 
@@ -40,8 +43,9 @@ describe('Тестирование работы модальных окон', ()
     cy.get('@modal').should('be.empty');
     cy.get(bunSelector).first().click();
     cy.get('@modal').should('exist');
-    cy.url().should('include', BUN_ID);
     cy.get('@modal').should('be.not.empty');
+    cy.url().should('include', BUN_ID);
+    cy.get('@modal').find('h3').should('contain.text', BUN_NAME);
   });
 
   it('закрытие модального окна по клику на крестик', () => {
