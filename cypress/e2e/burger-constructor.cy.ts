@@ -65,3 +65,62 @@ describe('Тестирование работы модальных окон', ()
     cy.get('@modal').should('be.empty');
   });
 });
+
+describe('Тестирование создания заказа', () => {
+  beforeEach(() => {
+    cy.intercept('GET', `${BURGER_API_URL}/ingredients`, { fixture: 'ingredients.json' });
+    cy.intercept('POST', `${BURGER_API_URL}/auth/login`, { fixture: 'user.json' });
+    cy.intercept('GET', `${BURGER_API_URL}/auth/user`, { fixture: 'user.json' });
+    cy.intercept('POST', `${BURGER_API_URL}/orders`, { fixture: 'order.json' });
+    cy.visit('/');
+    cy.get('[data-cy="order-btn"]').as('orderButton');
+    cy.get('#modals').as('modal');
+    cy.viewport(1440, 800);
+
+    window.localStorage.setItem('refreshToken', 'refreshtoken');
+    cy.setCookie('accessToken', 'accesstoken');
+  });
+
+  afterEach(() => {
+    window.localStorage.clear();
+    cy.clearAllCookies();
+  })
+
+  it('проверка невозможности оформления пустого заказа', () => {
+    cy.get('@orderButton').click();
+    cy.get('@modal').should('be.empty');
+  });
+
+  it('проверка невозможности оформления заказа без булок', () => {
+    cy.get(mainSelector).children('button').click();
+    cy.get('@orderButton').click();
+    cy.get('@modal').should('be.empty');
+  });
+
+  it('проверка возможности оформления собранного заказа', () => {
+    cy.get(bunSelector).children('button').click();
+    cy.get(mainSelector).children('button').click();
+    cy.get('@orderButton').should('not.be.disabled').click();
+    cy.get('@modal').should('not.be.empty');
+  });
+
+  it('проверка корректности оформления заказа', () => {
+    cy.get(bunSelector).children('button').click();
+    cy.get(mainSelector).children('button').click();
+    cy.get('@orderButton').should('not.be.disabled').click();
+    cy.get('@modal').should('not.be.empty');
+    cy.get('@modal').find('h2').contains('77740');
+  });
+
+  it('проверка очищения конструктора после оформления заказа', () => {
+    cy.get(bunSelector).children('button').click();
+    cy.get(mainSelector).children('button').click();
+    cy.get('@orderButton').should('not.be.disabled').click();
+    cy.get('@modal').should('not.be.empty');
+    cy.get('@modal').find('h2').contains('77740');
+    cy.get('body').type('{esc}');
+    cy.get('@modal').should('be.empty');
+    cy.get(bunSelector).find('.counter__num').should('not.exist');
+    cy.get(mainSelector).find('.counter__num').should('not.exist');
+  });
+})
